@@ -1,0 +1,80 @@
+﻿@model WebAPIClient.Models.FlightDetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>FlightModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FlightNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FlightNo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Departure)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Departure)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Destination)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Destination)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberPassenger)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumberPassenger)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Seats)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Seats)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price) CHF
+        </dd>
+    </dl>
+</div>
+<div>
+    <form asp-area="" asp-controller="Home" asp-action="BuyTicket" method="post">
+        <input type="hidden" asp-for="Form.FlightNo" value="@Model.Form.FlightNo" />
+        <input type="hidden" asp-for="Form.Price" value="@Model.Form.Price" />
+        <div class="row">
+            <div class="form-group col">
+                <label asp-for="Form.Passenger.Surname" class="control-label"> Surname</label>
+                <input asp-for="Form.Passenger.Surname" class="form-control" />
+                <span asp-validation-for="Form.Passenger.Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group col">
+                <label asp-for="Form.Passenger.GivenName" class="control-label">GivenName</label>
+                <input asp-for="Form.Passenger.GivenName" class="form-control" />
+                <span asp-validation-for="Form.Passenger.GivenName" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-3 ">
+                <input type="submit" value="Buy ticket" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

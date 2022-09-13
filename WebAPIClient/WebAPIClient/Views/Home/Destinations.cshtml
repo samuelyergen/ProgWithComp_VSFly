@@ -1,0 +1,76 @@
+﻿@model DestinationsViewModel
+
+@{
+    ViewData["Title"] = "Destinations";
+}
+
+<h1>Destinations</h1>
+<form asp-controller="Home" asp-action="Destinations" method="get">
+    <select name="destination">
+
+        @foreach (var destination in Model.Destinations)
+        {
+            @if (Model.DestinationSelected != null && destination.Destination == Model.DestinationSelected)
+            {
+                <option value=@destination.Destination selected>@destination.Destination (@destination.AveragePrice.ToString("0.00") CHF)</option>
+            }
+            else
+            {
+                <option value=@destination.Destination>@destination.Destination (@destination.AveragePrice.ToString("0.00") CHF)</option>
+             }
+        }
+    </select>
+    <input type="submit" value="Search" />
+</form>
+@if (Model.Tickets == null) { 
+    <p>Choose a destination !</p>
+} else if(Model.Tickets.Count()!=0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Destination
+                    </th>
+                    <th>
+                        Surname
+                    </th>
+                    <th>
+                        Given name
+                    </th>
+                    <th>
+                        Price paid
+                    </th>
+                    <th>
+                        Flight id
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var ticket in Model.Tickets)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => ticket.Destination)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => ticket.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => ticket.GivenName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => ticket.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => ticket.FlightID)
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else { 
+        <p>No tickets available</p>
+}
+                   
